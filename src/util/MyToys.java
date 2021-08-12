@@ -5,9 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-/*
-    class chứa các hàm đồ chơi cho việc nhập dữ liệu
-*/
 public class MyToys {
     private static Scanner sc = new Scanner(System.in);
 
@@ -23,9 +20,7 @@ public class MyToys {
             }
         }
     }
-    /*
-    xây dựng hàm lấy số nguyên nguyên từ lowerBound dến upperBound
-    */
+
     public static int getAnInteger(String inputMsg, String errorMsg, int lowerBound, int upperBound) {
         if (upperBound < lowerBound) {
             int tmp = upperBound;
@@ -46,6 +41,7 @@ public class MyToys {
             }
         }
     }
+    
     public static long getAnLong(String inputMsg, String errorMsg, long lowerBound, long upperBound) {
         if (upperBound < lowerBound) {
             long tmp = upperBound;
@@ -66,7 +62,6 @@ public class MyToys {
             }
         }
     }
-
 
     public static double getADouble(String inputMsg, String erroMsg) {
         double n;
@@ -159,9 +154,6 @@ public class MyToys {
                 System.out.print(inputMsg);
                 SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 d = df.parse(sc.nextLine());
-                //                System.out.println(df.format(lowerBound));
-                //                System.out.println(df.format(d));
-                //                System.out.println(df.format(upperDate));
                 if (d.compareTo(lowerBound) < 0 || d.compareTo(upperDate) > 0) {
                     throw new Exception();
                 }
