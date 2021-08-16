@@ -59,8 +59,31 @@ public class BookList {
                 book.showDetail();
         }
     }
+    
+    public void addNewBook() {
+        String isbn, title, authorId;
+        double price;
+        int pos;
+        do {
+            isbn = MyToys.getID("Enter book's ISBN\nISBN just includes 10 digits:   ", "Invalid", "^\\d{10}$");
+            pos = searchBookByIsbn(isbn);
+            if (pos != -1)
+                System.err.println("This book ISBN is already exist");
+        } while (pos != -1);
+        title = MyToys.getAName("Enter book's title: ",
+            "Title only contain alphabet");
+        price = MyToys.getADouble("Enter book's price ($): ",
+            "Price must be a positive real number", 0.1, 1000);
+        
+        boolean check = MyToys.getBoolean("Are you sure adding this book (Y/N): ",
+            "Invalid");
+        if (check) {
+            bookList.add(new Book(isbn, title, price, authorId));
+            System.out.println("A book's profile is sucessfully added");
+        }
+    }
 
-    public void printBookListAscByTitle() {
+    public void printBookListAscByTitle(AuthorList authorList) {
         if (bookList.isEmpty()) {
             System.out.println("The storage is empty. Nothing to print.");
             return;
@@ -72,7 +95,7 @@ public class BookList {
             "ISBN", "TITLE", "AUTHOR", "PRICE");
         System.out.println(header);
         for (Book book: bookList) {
-            book.showDetail();
+            book.showDetail(authorList);
         }
     }
 }

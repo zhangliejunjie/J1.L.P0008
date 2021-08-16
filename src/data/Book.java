@@ -1,6 +1,8 @@
 package data;
 
-public class Book implements Comparable < Book > {
+import java.io.Serializable;
+
+public class Book implements Comparable < Book >, Serializable {
     private String isbn;
     private String title;
     private double price;
@@ -56,15 +58,15 @@ public class Book implements Comparable < Book > {
     }
     //0-306-40615-2
     public void showDetail(AuthorList authorList) {
-        Author aut = authorList.searchObjectAuthorById(authorId);
-
-        if (aut != null) {
+        Author aut = null;
+        if (authorList != null) 
+            aut = authorList.searchObjectAuthorById(authorId);
+        if (aut != null) 
             System.out.printf("|%13s|%-25s|%-15s|%-5.2f|\n",
                 isbn, title, aut.getName(), price);
-        } else {
+        else 
             System.out.printf("|%13s|%-25s|%-15s|%-5.2f|\n",
-                isbn, title, "Unknown", price);
-        }
+                isbn, title, authorId, price);
     }
 
     @Override
