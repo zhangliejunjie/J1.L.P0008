@@ -60,7 +60,11 @@ public class BookList {
         }
     }
     
-    public void addNewBook() {
+    public void addNewBook(AuthorList authorList) {
+        if (authorList == null || authorList.getAuthorList().isEmpty()) {
+            System.err.println("The author list is not loaded");
+            return;
+        }
         String isbn, title, authorId;
         double price;
         int pos;
@@ -74,7 +78,12 @@ public class BookList {
             "Title only contain alphabet");
         price = MyToys.getADouble("Enter book's price ($): ",
             "Price must be a positive real number", 0.1, 1000);
-        
+        do {
+            authorId = MyToys.getID("Enter author's ID (AADDDDD)\nA matches any alphabet\nD matches any digit: ", "Invalid", "^[A-Za-z]{2}\\d{5}$");
+            pos = authorList.searchAuthorById(authorId);
+            if (pos != -1)
+                System.err.println("This book ISBN is already exist");
+        } while (pos != -1);
         boolean check = MyToys.getBoolean("Are you sure adding this book (Y/N): ",
             "Invalid");
         if (check) {
